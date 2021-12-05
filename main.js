@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const ort = require('onnxruntime-node')
@@ -11,23 +11,16 @@ async function loadModel() {
     const sessionOption = {
         // executionProviders: ['wasm'],
     }
-    const session = await ort.InferenceSession.create('./RealESRGAN_x4plus_int8.onnx', sessionOption)
+    const session = await ort.InferenceSession.create(
+        path.join(__dirname, './RealESRGAN_x4plus_int8.onnx'),
+        sessionOption,
+    )
     console.log('model loaded')
     return session
 }
 
 let MODEL = null
 
-const { ipcMain } = require('electron')
-
-// function toBuffer(ab) {
-//     const buf = Buffer.alloc(ab.byteLength);
-//     const view = new Uint8Array(ab);
-//     for (let i = 0; i < buf.length; ++i) {
-//         buf[i] = view[i];
-//     }
-//     return buf;
-// }
 
 ipcMain.on('asynchronous-message', async (event, image) => {
     if (image.save) {
@@ -49,9 +42,7 @@ ipcMain.on('asynchronous-message', async (event, image) => {
     if (!MODEL) {
         MODEL = await loadModel()
     }
-    // console.log('start predict', new Date())
     const results = await MODEL.run(feeds)
-    // console.log('over predict', new Date())
     event.reply('asynchronous-reply', {
         data: results.outputs.data,
         height: image.height,
@@ -69,7 +60,7 @@ const createWindow = () => {
         },
     })
 
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     win.loadFile('index.html')
 
@@ -86,4 +77,3 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
 })
-
