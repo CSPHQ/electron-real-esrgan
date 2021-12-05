@@ -1,0 +1,16 @@
+
+label {
+    cursor: pointer;
+}
+/* input#file { */
+    /* display: none; */
+/* } */
+img#output {
+    display: none;
+}
+
+canvas {
+    max-width: 45vw;
+    max-height: 45vh;
+    padding: 20px;
+}

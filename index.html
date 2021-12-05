@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="script-src 'self'"> -->
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="tf.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <img alt='preview' id="output" />
+        <input type="file" accept="image/*" name="image" id="file" />
+        <button id='save'>Save</button>
+    </div>
+    <div>
+        <canvas id='canvas'></canvas>
+        <canvas id='outputCanvas'></canvas>
+    </div>
+    <script src="./renderer.js"></script>
+</body>
+
+</html>
