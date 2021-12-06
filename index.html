@@ -8,7 +8,6 @@
     <meta http-equiv="X-Content-Security-Policy" content="script-src 'self'"> -->
     <title>Super Resolution 1.0.0 by QHDuan</title>
     <link rel="stylesheet" href="style.css">
-    <script src="tf.min.js"></script>
 </head>
 
 <body>
@@ -21,7 +20,7 @@
             <label htmlFor='pad'>Pad size:</label>
             <input type='text' name='pad' id='pad' value='10' />
             <label htmlFor='tile'>Tile size:</label>
-            <input type='text' name='tile' id='tile' value='60' />
+            <input type='text' name='tile' id='tile' value='10' />
         </div>
         <div class='controls'>
             <button id='save-jpeg'>Save JPG</button>
@@ -43,7 +42,10 @@
         <button id='homepage'>Homepage</button>
         <button id='license'>License</button>
     </div>
-    <script src="./renderer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.10.0-dev.20211124-a3ebc5e08/dist/ort.min.js" integrity="sha256-SFunHSvCUn4yy5XRYm67bgomfidGSOLqbhHAS4oiixw=" crossorigin="anonymous"></script>
+    <script src="renderer.js"></script>
 </body>
 
 </html>

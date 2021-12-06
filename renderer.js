@@ -15,38 +15,60 @@ function composeImage(data, width, height) {
     return t
 }
 
+ort.env.wasm.numThreads = 16
+ort.env.wasm.simd = true
+ort.env.wasm.proxy = true
+
+async function loadModel() {
+    const session = await ort.InferenceSession.create('RealESRGAN_x4plus_int8.onnx')
+    return session
+}
+
+let MODEL = null
+
 /**
  * 把图片提交到后台预测，并将预测结果返回
  * @param {*} event 要处理的图片的数据
  * @returns 处理好的Tensor
  */
-function predictImage(event, tilePad) {
-    return new Promise(resolve => {
-        sendBackend(event)
-        window.setCallback(async image => {
-            window.setCallback(null)
+async function predictImage(event, tilePad) {
+    // return new Promise(resolve => {
+        // sendBackend(event)
+        // window.setCallback(async image => {
+        //     window.setCallback(null)
+    const imageData = Float32Array.from(event.data)
+    const tensor = new ort.Tensor('float32', imageData, [1, 3, event.height, event.width])
+    const feeds = { inputs: tensor }
+    if (!MODEL) {
+        MODEL = await loadModel()
+    }
+    const results = await MODEL.run(feeds)
+    const image = {
+        data: results.outputs.data,
+        height: event.height,
+        width: event.width,
+    }
+    let t = tf.tensor(Array.from(image.data))
+    t = tf.reshape(t, [3, image.height * 4, image.width * 4])
+    // console.log('cut', [0, tilePad, tilePad], [3, image.height * 4 - tilePad, image.width * 4 - tilePad])
+    t = tf.slice(t, [0, tilePad * 4, tilePad * 4], [3, image.height * 4 - tilePad * 8, image.width * 4 - tilePad * 8])
+    t = tf.mul(t, 255)
+    console.log('t', t)
+    t = tf.transpose(t, [1, 2, 0])
+    t = Array.from(t.dataSync())
 
-            let t = tf.tensor(Array.from(image.data))
-            t = tf.reshape(t, [3, image.height * 4, image.width * 4])
-            // console.log('cut', [0, tilePad, tilePad], [3, image.height * 4 - tilePad, image.width * 4 - tilePad])
-            t = tf.slice(t, [0, tilePad * 4, tilePad * 4], [3, image.height * 4 - tilePad * 8, image.width * 4 - tilePad * 8])
-            t = tf.mul(t, 255)
-            console.log('t', t)
-            t = tf.transpose(t, [1, 2, 0])
-            t = Array.from(t.dataSync())
-
-            let arr = []
-            for (let i = 0; i < t.length; i ++) {
-                arr.push(t[i])
-                if (((i + 1) % 3) === 0) {
-                    arr.push(255)
-                }
-            }
-            arr = new Uint8ClampedArray(arr)
-            const imageData = new ImageData(arr, image.width * 4 - tilePad * 8, image.height * 4 - tilePad * 8)
-            resolve(imageData)
-        })
-    })
+    let arr = []
+    for (let i = 0; i < t.length; i ++) {
+        arr.push(t[i])
+        if (((i + 1) % 3) === 0) {
+            arr.push(255)
+        }
+    }
+    arr = new Uint8ClampedArray(arr)
+    const id = new ImageData(arr, image.width * 4 - tilePad * 8, image.height * 4 - tilePad * 8)
+    return id
+    //     })
+    // })
 }
 
 document.querySelector('input#file').addEventListener('change', loadFile)
