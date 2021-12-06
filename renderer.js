@@ -146,3 +146,12 @@ async function loadFile(event) {
         }
     })
 }
+
+document.querySelector('#homepage').addEventListener('click', event => {
+    event.preventDefault()
+    require("shell").openExternal('https://github.com/CSPHQ/electron-real-esrgan')
+})
+document.querySelector('#license').addEventListener('click', event => {
+    event.preventDefault()
+    require("shell").openExternal('https://github.com/CSPHQ/electron-real-esrgan/blob/master/LICENSE')
+})
