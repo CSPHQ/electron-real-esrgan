@@ -1,5 +1,5 @@
 {
-  "name": "my-electron-app",
+  "name": "super-resolution",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
-  "author": "",
+  "author": "mail@qhduan.com",
   "license": "ISC",
   "devDependencies": {
     "electron": "^16.0.4",

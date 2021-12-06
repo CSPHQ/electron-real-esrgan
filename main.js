@@ -27,7 +27,7 @@ ipcMain.on('asynchronous-message', async (event, image) => {
         let filename = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
             title: 'Download to File…',
             filters: [
-                { name: 'All Files', extensions: ['*'] }
+                { name: 'All Files', extensions: [image.ext] }
             ]
         });
         if (filename && filename.filePath) {
@@ -60,7 +60,7 @@ const createWindow = () => {
         },
     })
 
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
     win.loadFile('index.html')
 

@@ -13,13 +13,31 @@
 
 <body>
     <div>
-        <img alt='preview' id="output" />
-        <input type="file" accept="image/*" name="image" id="file" />
-        <button id='save'>Save</button>
+        <!-- <img alt='preview' id="output" /> -->
+        <div class='controls'>
+            <input type="file" accept="image/*" name="image" id="file" />
+        </div>
+        <div class='controls'>
+            <label htmlFor='pad'>Pad size:</label>
+            <input type='text' name='pad' id='pad' value='10' />
+            <label htmlFor='tile'>Tile size:</label>
+            <input type='text' name='tile' id='tile' value='60' />
+        </div>
+        <div class='controls'>
+            <button id='save-jpeg'>Save JPG</button>
+            <button id='save-png'>Save PNG</button>
+            <button id='save-webp'>Save WEBP</button>
+        </div>
     </div>
-    <div>
-        <canvas id='canvas'></canvas>
-        <canvas id='outputCanvas'></canvas>
+    <div class='controls'>
+        <div>
+            <canvas id='canvas'></canvas>
+            <div id='canvasInfo'></div>
+        </div>
+        <div>
+            <canvas id='outputCanvas'></canvas>
+            <div id='outputCanvasInfo'></div>
+        </div>
     </div>
     <script src="./renderer.js"></script>
 </body>
