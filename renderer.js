@@ -73,24 +73,6 @@ async function predictImage(event, tilePad) {
 
 document.querySelector('input#file').addEventListener('change', loadFile)
 
-function exportImage(type, ext) {
-    type = type || 'image/jpeg'
-    ext = ext || '*'
-    // 输出画布
-    const outputCanvas = document.getElementById('outputCanvas')
-    const url = outputCanvas.toDataURL(type, 0.9)
-    const base64Data = url.replace(/^data:[^,]+,/, "")
-    if (base64Data) {
-        sendBackend({
-            save: base64Data,
-            ext,
-        })
-    }
-}
-document.querySelector('button#save-jpeg').addEventListener('click', () => exportImage('image/jpeg', '.jpg'))
-document.querySelector('button#save-png').addEventListener('click', () => exportImage('image/png', '.png'))
-document.querySelector('button#save-webp').addEventListener('click', () => exportImage('image/webp', '.webp'))
-
 function createImage(event) {
     const image = document.createElement('img')
     image.style.display = 'none'
@@ -168,10 +150,3 @@ async function loadFile(event) {
         }
     })
 }
-
-document.querySelector('#homepage').addEventListener('click', () => {
-    openurl('https://github.com/CSPHQ/electron-real-esrgan')
-})
-document.querySelector('#license').addEventListener('click', () => {
-    openurl('https://github.com/CSPHQ/electron-real-esrgan/blob/master/LICENSE')
-})

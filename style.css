@@ -32,3 +32,8 @@ div.controls {
 button {
     margin: 10px;
 }
+
+a {
+    margin: 10px;
+    cursor: pointer;
+}

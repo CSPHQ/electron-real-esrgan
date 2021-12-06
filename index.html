@@ -17,15 +17,11 @@
             <input type="file" accept="image/*" name="image" id="file" />
         </div>
         <div class='controls'>
+            <h4>非常慢，请注意</h4>
             <label htmlFor='pad'>Pad size:</label>
             <input type='text' name='pad' id='pad' value='10' />
             <label htmlFor='tile'>Tile size:</label>
             <input type='text' name='tile' id='tile' value='10' />
-        </div>
-        <div class='controls'>
-            <button id='save-jpeg'>Save JPG</button>
-            <button id='save-png'>Save PNG</button>
-            <button id='save-webp'>Save WEBP</button>
         </div>
     </div>
     <div class='controls'>
@@ -34,13 +30,14 @@
             <canvas id='canvas'></canvas>
         </div>
         <div>
+            <h4>图片生成之后，右键另存</h4>
             <div id='outputCanvasInfo'></div>
             <canvas id='outputCanvas'></canvas>
         </div>
     </div>
     <div class="controls">
-        <button id='homepage'>Homepage</button>
-        <button id='license'>License</button>
+        <a id='homepage' href='https://github.com/CSPHQ/electron-real-esrgan' target='_blank'>Homepage</a>
+        <a id='license' href='https://github.com/CSPHQ/electron-real-esrgan/blob/master/LICENSE' target='_blank'>License</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script> -->
