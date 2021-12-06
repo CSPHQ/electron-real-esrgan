@@ -1,6 +1,5 @@
 
-const { contextBridge } = require('electron')
-const { ipcRenderer } = require('electron')
+const { contextBridge, ipcRenderer, shell } = require('electron')
 
 let callback = null
 
@@ -19,3 +18,6 @@ function setCallback(cb) {
 }
 contextBridge.exposeInMainWorld('setCallback', setCallback)
 contextBridge.exposeInMainWorld('sendBackend', sendBackend)
+contextBridge.exposeInMainWorld('openurl', url => {
+    shell.openExternal(url)
+})
