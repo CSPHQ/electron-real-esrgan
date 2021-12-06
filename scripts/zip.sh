@@ -5,5 +5,5 @@ cd sr-build
 for x in ./*
 do
     echo ${x}
-    zip -rq ../sr-build-zip/${x}.zip ./${x}
+    zip -rq --symlinks ../sr-build-zip/${x}.zip ./${x}
 done
