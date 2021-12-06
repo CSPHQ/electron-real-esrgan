@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mkdir -p dist
-(cd dist && npx electron-packager ../ --all --ignore="\.git(ignore|modules)|dist")
+mkdir -p sr-build
+(cd sr-build && npx electron-packager ../ --all --overwrite --ignore="\.git(ignore|modules)|sr-build")
