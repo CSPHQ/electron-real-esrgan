@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="script-src 'self'"> -->
+    <title>动漫小版本 Super Resolution 1.0.0 by QHDuan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <!-- <img alt='preview' id="output" /> -->
+        <div class='controls'>
+            <input type="file" accept="image/*" name="image" id="file" />
+        </div>
+        <div class='controls'>
+            <a href="index.html">点击这里使用通用版本模型</a>
+            <h4>非常慢，请注意</h4>
+            <label htmlFor='pad'>Pad size:</label>
+            <input type='text' name='pad' id='pad' value='10' />
+            <label htmlFor='tile'>Tile size:</label>
+            <input type='text' name='tile' id='tile' value='30' />
+        </div>
+    </div>
+    <div class='controls'>
+        <div>
+            <div id='canvasInfo'></div>
+            <canvas id='canvas'></canvas>
+        </div>
+        <div>
+            <h4>图片生成之后，右键另存</h4>
+            <div id='outputCanvasInfo'></div>
+            <canvas id='outputCanvas'></canvas>
+        </div>
+    </div>
+    <div class="controls">
+        <a id='homepage' href='https://github.com/CSPHQ/electron-real-esrgan' target='_blank'>Homepage</a>
+        <a id='license' href='https://github.com/CSPHQ/electron-real-esrgan/blob/master/LICENSE' target='_blank'>License</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.10.0-dev.20211124-a3ebc5e08/dist/ort.min.js" integrity="sha256-SFunHSvCUn4yy5XRYm67bgomfidGSOLqbhHAS4oiixw=" crossorigin="anonymous"></script>
+    <script src="model-anime.js"></script>
+    <script src="renderer.js"></script>
+</body>
+
+</html>

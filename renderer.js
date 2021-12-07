@@ -15,16 +15,9 @@ function composeImage(data, width, height) {
     return t
 }
 
-ort.env.wasm.numThreads = 16
+ort.env.wasm.numThreads = 4
 ort.env.wasm.simd = true
 ort.env.wasm.proxy = true
-
-async function loadModel() {
-    const session = await ort.InferenceSession.create('RealESRGAN_x4plus_int8.onnx')
-    return session
-}
-
-let MODEL = null
 
 /**
  * 把图片提交到后台预测，并将预测结果返回
@@ -39,9 +32,7 @@ async function predictImage(event, tilePad) {
     const imageData = Float32Array.from(event.data)
     const tensor = new ort.Tensor('float32', imageData, [1, 3, event.height, event.width])
     const feeds = { inputs: tensor }
-    if (!MODEL) {
-        MODEL = await loadModel()
-    }
+    MODEL = await loadModel()
     const results = await MODEL.run(feeds)
     const image = {
         data: results.outputs.data,

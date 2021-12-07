@@ -6,7 +6,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="script-src 'self'"> -->
-    <title>Super Resolution 1.0.0 by QHDuan</title>
+    <title>通用版本 Super Resolution 1.0.0 by QHDuan</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,6 +17,7 @@
             <input type="file" accept="image/*" name="image" id="file" />
         </div>
         <div class='controls'>
+            <a href="anime.html">点击这里使用动漫小版本模型</a>
             <h4>非常慢，请注意</h4>
             <label htmlFor='pad'>Pad size:</label>
             <input type='text' name='pad' id='pad' value='10' />
@@ -42,6 +43,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.10.0-dev.20211124-a3ebc5e08/dist/ort.min.js" integrity="sha256-SFunHSvCUn4yy5XRYm67bgomfidGSOLqbhHAS4oiixw=" crossorigin="anonymous"></script>
+    <script src="model.js"></script>
     <script src="renderer.js"></script>
 </body>
 
